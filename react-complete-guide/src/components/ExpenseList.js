@@ -1,24 +1,45 @@
+import { useState } from "react";
+import ExpenseFilter from "./ExpenseFilter";
 import ExpenseItem from "./ExpenseItem";
 import "./ExpenseList.css";
 
 function ExpenseList(props) {
-  const data = props.expenses;
+  const [userSelectedYear, setSelectedYear] = useState("2021");
 
-  console.log(data.length);
-
-  // Iterate through the data to display each expense
-  for (let index = 0; index < data.length; index++) {
-    const expense_title = data[index].title;
-    const expense_amount = data[index].amount;
-    const expense_date = data[index].date;
-
-    <ExpenseItem
-      title={expense_title}
-      amount={expense_amount}
-      date={expense_date}
-    />;
+  function selectedYear(year) {
+    setSelectedYear(year);
   }
-  return <div className="expenses"></div>;
+
+  return (
+    <div>
+      <div className="expenses">
+        <ExpenseFilter
+          defaultYear={userSelectedYear}
+          selectedYear={selectedYear}
+        />
+        <ExpenseItem
+          title={props.items[0].title}
+          date={props.items[0].date}
+          amount={props.items[0].amount}
+        />
+        <ExpenseItem
+          title={props.items[1].title}
+          date={props.items[1].date}
+          amount={props.items[1].amount}
+        />
+        <ExpenseItem
+          title={props.items[2].title}
+          date={props.items[2].date}
+          amount={props.items[2].amount}
+        />
+        <ExpenseItem
+          title={props.items[3].title}
+          date={props.items[3].date}
+          amount={props.items[3].amount}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default ExpenseList;
